@@ -1,0 +1,85 @@
+import random as rd
+import os
+
+def add_num(mas):
+	a=True
+	while a:
+		s1 = rd.choice([0,1,2,3])
+		s2 = rd.choice([0,1,2,3])
+		if 	mas[s1][s2]==0:
+			mas[s1][s2]=rd.choice([2,4])
+			a=False
+
+def eend(mas):
+	k=0
+	for i in range(4):
+		for j in range(4):
+			if mas[i][j]==0:
+				k=1
+	if k==1:
+		return True
+	else:
+		return False
+		
+def mas_print(mas):
+	print('-'*7)
+	for lis in mas:
+		print(*lis) # *-распаковка
+	print('-'*7)
+
+def move_up(mas,key):
+	if key=='w':	
+		for stolbec in range(4):
+			b=[]
+			k=0
+			for i in range(4):
+				if mas[i][stolbec]!=0:
+					b.append(mas[i][stolbec])
+			for i in '1111':
+				b.append(0)
+			for i in range(4):
+				mas[i][stolbec]=b[i]
+	if key=='s':
+		for stolbec in range(4):
+			b=[]
+			k=0
+			for i in range(4):
+				if mas[i][stolbec]!=0:
+					b.append(mas[i][stolbec])
+			for i in '1111':
+				b.append(0)
+			for i in range(4):
+				mas[i][stolbec]=b[i]
+
+def plus(mas,key):
+	if key=='w':
+		for stolbec in range(4):
+			for i in range(3):
+				if mas[i][stolbec]==mas[i+1][stolbec]:
+					mas[i+1][stolbec]+=mas[i][stolbec]
+					mas[i][stolbec]=0
+	if key=='s':
+		for stolbec in range(4):
+			for i in range(3):
+				if mas[i][stolbec]==mas[i+1][stolbec]:
+					mas[i+1][stolbec]+=mas[i][stolbec]
+					mas[i][stolbec]=0
+
+def UP():
+	move_up(mas,key)
+	plus(mas,key)
+	move_up(mas,key)
+
+mas = [
+	[0, 0, 0, 0],
+	[0, 0, 0, 0],
+	[0, 0, 0, 0],
+	[0, 0, 0, 0],
+]
+
+key=''
+while eend(mas):
+	eend(mas)
+	
+
+print('The End')
